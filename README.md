@@ -19,12 +19,13 @@ Durante a **Fatec Expo Week**, os participantes realizam missões presenciais e 
 3. [Metodologia](#3-metodologia)
 4. [Tecnologias](#4-tecnologias)
 5. [Arquitetura e estrutura](#5-arquitetura-e-estrutura)
-6. [Requisitos](#6-requisitos)
-7. [Gamificação](#7-gamificação)
-8. [Fluxos da aplicação](#8-fluxos-da-aplicação)
-9. [Como executar](#9-como-executar)
-10. [Funcionalidades futuras](#10-funcionalidades-futuras)
-11. [Equipe](#11-equipe)
+6. [Banco de dados](#6-banco-de-dados)
+7. [Requisitos](#7-requisitos)
+8. [Gamificação](#8-gamificação)
+9. [Fluxos da aplicação](#9-fluxos-da-aplicação)
+10. [Como executar](#10-como-executar)
+11. [Funcionalidades futuras](#11-funcionalidades-futuras)
+12. [Equipe](#12-equipe)
 
 ---
 
@@ -96,7 +97,39 @@ fatec-mission/
 
 ---
 
-## 6. Requisitos
+## 6. Banco de dados
+
+O Fatec Mission utiliza **MySQL** (charset `utf8mb4`, mecanismo InnoDB). O banco e as tabelas são criados automaticamente pela API, sem necessidade de executar SQL manualmente.
+
+| Tabela | Principais campos | Descrição |
+|---|---|---|
+| `usuario` | `usuario_id`, `nome`, `email` (único), `senha_hash`, `curso`, `semestre`, `xp`, `role` | Estudantes e administradores. O `role` pode ser `estudante` ou `administrador` |
+| `missao` | `missao_id`, `titulo`, `descricao`, `dificuldade`, `tipo`, `xp`, `status`, `qr_code` (único) | Missões disponíveis. A dificuldade define o XP |
+| `historico` | `historico_id`, `usuario_id`, `missao_id`, `resultado`, `xp_variacao` | Registra cada tentativa (`sucesso` ou `erro`) e a variação de XP |
+| `conquista` | `conquista_id`, `nome`, `descricao`, `icone`, `requisito` | Conquistas e o requisito para desbloqueá-las |
+| `usuario_conquista` | `usuario_id`, `conquista_id`, `data_desbloqueio` | Conquistas desbloqueadas por cada usuário |
+| `pergunta` | `pergunta_id`, `missao_id`, `enunciado`, `ordem` | Perguntas das missões do tipo quiz |
+| `alternativa` | `alternativa_id`, `pergunta_id`, `texto`, `correta`, `ordem` | Alternativas de cada pergunta (somente uma correta) |
+
+**Relacionamentos:**
+
+```text
+usuario ──< historico >── missao ──< pergunta ──< alternativa
+   │
+   └──< usuario_conquista >── conquista
+```
+
+**Observações:**
+
+- O XP do usuário é a soma das variações registradas em `historico`, o que torna o saldo auditável.
+- O ranking não é armazenado: é calculado por consulta, ordenando os usuários pelo XP.
+- Uma missão com histórico de tentativas não pode ser excluída, apenas desativada.
+- O banco garante uma única alternativa correta por pergunta.
+- Detalhes completos do esquema estão no README da API.
+
+---
+
+## 7. Requisitos
 
 ### Requisitos funcionais (RF)
 
@@ -136,7 +169,7 @@ fatec-mission/
 
 ---
 
-## 7. Gamificação
+## 8. Gamificação
 
 ### XP e penalidades
 
@@ -171,7 +204,7 @@ Classifica os estudantes pelo XP acumulado, com filtro por curso e destaque da p
 
 ---
 
-## 8. Fluxos da aplicação
+## 9. Fluxos da aplicação
 
 **Estudante:**
 `Cadastro → Login → Início → Missões → Detalhes → Realização → Validação → XP → Conquista → Ranking`
@@ -184,7 +217,7 @@ Classifica os estudantes pelo XP acumulado, com filtro por curso e destaque da p
 
 ---
 
-## 9. Como executar
+## 10. Como executar
 
 **Pré-requisitos:** Node.js 18+ e MySQL 8.0+ em execução.
 
@@ -218,7 +251,7 @@ npm run dev          # http://localhost:5175
 
 ---
 
-## 10. Funcionalidades futuras
+## 11. Funcionalidades futuras
 
 Fora do escopo obrigatório inicial:
 
@@ -231,7 +264,7 @@ Fora do escopo obrigatório inicial:
 
 ---
 
-## 11. Equipe
+## 12. Equipe
 
 | Integrante | Função | Responsabilidades |
 |---|---|---|
@@ -240,6 +273,14 @@ Fora do escopo obrigatório inicial:
 | **Luana Camila Ribeiro Silva** | Front-End | Interfaces, fluxos de missões, conquistas, ranking e responsividade |
 | **Eliete Santos da Silva** | Back-End | Arquitetura, API REST, integração e painel administrativo |
 | **Francianny Leite da Silva** | Banco de Dados e Documentação | Modelagem do banco, autenticação, permissões e documentação |
+
+---
+
+## Agradecimentos
+
+Agradecemos a todos que fizeram parte do desenvolvimento do Fatec Mission.
+
+E um agradecimento especial ao **Thiago Martins** pela contribuição nos bastidores.
 
 ---
 
