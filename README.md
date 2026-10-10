@@ -1,6 +1,6 @@
-# Fatec Mission — Plataforma de Gamificação da Experiência Acadêmica
+# Fatec Mission — Plataforma de Gamificação
 
-O **Fatec Mission** é uma plataforma de gamificação que transforma a Fatec em um ambiente de missões, desafios e recompensas, incentivando os estudantes a conhecerem a instituição, participarem de eventos e interagirem com a comunidade.
+O **Fatec Mission** é uma plataforma de gamificação que tem como objetivo transformar a Fatec em um ambiente de missões, desafios e recompensas, incentivando os estudantes a conhecerem a instituição, participarem de eventos e interagirem com a comunidade.
 
 Durante a **Fatec Expo Week**, os participantes realizam missões presenciais e virtuais, validam atividades por **QR Code**, respondem a **quizzes**, acumulam **XP**, desbloqueiam **conquistas** e acompanham sua posição no **ranking**.
 
