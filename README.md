@@ -187,16 +187,14 @@ Desbloqueadas automaticamente ao atingir o requisito:
 
 | Conquista | Requisito |
 |---|---|
-| Primeiro Passo | Concluir a primeira missão |
-| Primeiro tombo | Erre sua primeira missão |
-| Dei uma olhada | Encontre seu primeiro QR Code |
-| Confiei no meu potencial | Erre 3 missões |
-| Ligeirinho | Complete 3 missões em 5 minutos |
-| Sem parar | Encontre 5 QR Codes |
-| Sem errar | Complete 8 missões sem nenhum erro |
-| Marquei presença | Complete 10 missões |
-| No ritmo | Complete 25 missões |
-| Onde está o Wally? | Conclua a missão especial |
+| Primeiros Passos | Concluir a primeira missão
+| Explorador | Concluir 5 missões
+| Veterano do Campus | Concluir 10 missões
+| Colecionador de XP	| Acumular 500 de XP
+| Mestre do XP | Acumular 1000 de XP
+| Destemido	| Concluir uma missão difícil
+| Caçador de Desafios	| Concluir 3 missões difíceis
+| Pé na Estrada	| Concluir 2 missões do Tipo 1
 
 ### Ranking
 
