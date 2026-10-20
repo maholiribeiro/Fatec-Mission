@@ -282,4 +282,4 @@ E um agradecimento especial ao **Thiago Martins** pela contribuição nos bastid
 
 ---
 
-**Projeto acadêmico** desenvolvido no curso de **Desenvolvimento de Software Multiplataforma (DSM)** da **Fatec Osasco**, no **4º semestre de 2026**, para a proposta da **Fatec Expo Week**.
+**Projeto acadêmico** desenvolvido no curso de **Desenvolvimento de Software Multiplataforma (DSM)** da **Fatec Osasco** no **4º semestre**, para a proposta da **Fatec Expo Week 2026.2**.
