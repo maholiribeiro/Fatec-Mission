@@ -37,7 +37,7 @@ O Fatec Mission é formado por **três aplicações**, cada uma em seu próprio 
 |---|---|---|
 | **App do estudante** | [`fatec-mission-web`](https://github.com/maholiribeiro/fatec-mission-web) | Front-end *mobile-first*: missões, leitor de QR Code, quizzes, conquistas, ranking e perfil |
 | **Painel administrativo** | [`fatec-mission-admin`](https://github.com/maholiribeiro/fatec-mission-admin) | Aplicação desktop com dashboard de indicadores e gestão de missões e quizzes |
-| **API** | [`fatec-mission-api`](COLE-AQUI-O-LINK-DO-REPOSITORIO-API) | Regras de negócio, autenticação, banco de dados e documentação Swagger |
+| **API** | [`fatec-mission-api`](https://github.com/maholiribeiro/fatec-mission-api) | Regras de negócio, autenticação, banco de dados e documentação Swagger |
 
 Cada repositório possui um README próprio com os detalhes técnicos (rotas, telas, banco de dados, testes e variáveis de ambiente).
 
