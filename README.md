@@ -5,9 +5,9 @@ O **Fatec Mission** é uma plataforma de gamificação que tem como objetivo tra
 Durante a **Fatec Expo Week**, os participantes realizam missões presenciais e virtuais, validam atividades por **QR Code**, respondem a **quizzes**, acumulam **XP**, desbloqueiam **conquistas** e acompanham sua posição no **ranking**.
 
 > **MISSÃO DESBLOQUEADA**
-> 
+>
 > Encontre o QR Code localizado na biblioteca e leia-o com o aplicativo.
-> 
+>
 > **+75 XP** · Nova conquista disponível!
 
 ---
@@ -31,15 +31,15 @@ Durante a **Fatec Expo Week**, os participantes realizam missões presenciais e 
 
 ## 1. Visão geral
 
-O sistema é formado por três aplicações que se comunicam por uma **API REST privada**:
+O Fatec Mission é formado por **três aplicações**, cada uma em seu próprio repositório, que se comunicam por uma **API REST privada**. Este é o **repositório principal**, que reúne a documentação e as explicações gerais do projeto.
 
-| Aplicação | Pasta | Descrição |
+| Aplicação | Repositório | Descrição |
 |---|---|---|
-| **App do estudante** | [`fatec-mission-web`](./fatec-mission-web) | Front-end *mobile-first*: missões, leitor de QR Code, quizzes, conquistas, ranking e perfil |
-| **Painel administrativo** | [`fatec-mission-admin`](./fatec-mission-admin) | Aplicação desktop com dashboard de indicadores e gestão de missões e quizzes |
-| **API** | [`fatec-mission-api`](./fatec-mission-api) | Regras de negócio, autenticação, banco de dados e documentação Swagger |
+| **App do estudante** | [`fatec-mission-web`](https://github.com/maholiribeiro/fatec-mission-web) | Front-end *mobile-first*: missões, leitor de QR Code, quizzes, conquistas, ranking e perfil |
+| **Painel administrativo** | [`fatec-mission-admin`](https://github.com/maholiribeiro/fatec-mission-admin) | Aplicação desktop com dashboard de indicadores e gestão de missões e quizzes |
+| **API** | [`fatec-mission-api`](COLE-AQUI-O-LINK-DO-REPOSITORIO-API) | Regras de negócio, autenticação, banco de dados e documentação Swagger |
 
-Cada pasta possui um README próprio com os detalhes técnicos (rotas, telas, banco de dados, testes e variáveis de ambiente).
+Cada repositório possui um README próprio com os detalhes técnicos (rotas, telas, banco de dados, testes e variáveis de ambiente).
 
 ---
 
@@ -87,12 +87,15 @@ App do estudante (React)  ┐
 Painel admin (React)      ┘
 ```
 
+**Organização dos repositórios.** Cada aplicação tem seu repositório. Para executar o projeto completo com o script `.bat`, os três devem ser clonados **dentro da pasta do repositório principal**, com os nomes abaixo:
+
 ```text
-fatec-mission/
-├── fatec-mission-api/      # Back-end (routes, controllers, services, models, middlewares)
-├── fatec-mission-web/      # App do estudante
-├── fatec-mission-admin/    # Painel administrativo
-└── iniciar-fatec-mission.bat   # Inicia os 3 projetos (Windows)
+fatec-mission/                  # Repositório principal (documentação)
+├── iniciar-fatec-mission.bat   # Script que inicia os 3 projetos (Windows)
+├── README.md
+├── fatec-mission-api/          # Repositório da API (back-end)
+├── fatec-mission-web/          # Repositório do app do estudante
+└── fatec-mission-admin/        # Repositório do painel administrativo
 ```
 
 ---
@@ -187,14 +190,14 @@ Desbloqueadas automaticamente ao atingir o requisito:
 
 | Conquista | Requisito |
 |---|---|
-| Primeiros Passos | Concluir a primeira missão
-| Explorador | Concluir 5 missões
-| Veterano do Campus | Concluir 10 missões
-| Colecionador de XP	| Acumular 500 de XP
-| Mestre do XP | Acumular 1000 de XP
-| Destemido	| Concluir uma missão difícil
-| Caçador de Desafios	| Concluir 3 missões difíceis
-| Pé na Estrada	| Concluir 2 missões do Tipo 1
+| Primeiros Passos | Concluir a primeira missão |
+| Explorador | Concluir 5 missões |
+| Veterano do Campus | Concluir 10 missões |
+| Colecionador de XP | Acumular 500 de XP |
+| Mestre do XP | Acumular 1000 de XP |
+| Destemido | Concluir uma missão difícil |
+| Caçador de Desafios | Concluir 3 missões difíceis |
+| Pé na Estrada | Concluir 2 missões do Tipo 1 |
 
 ### Ranking
 
@@ -217,25 +220,55 @@ Classifica os estudantes pelo XP acumulado, com filtro por curso e destaque da p
 
 ## 10. Como executar
 
-**Pré-requisitos:** Node.js 18+ e MySQL 8.0+ em execução.
+**Pré-requisitos:** [Git](https://git-scm.com), [Node.js](https://nodejs.org) 18+ e MySQL 8.0+ instalado e **em execução**.
 
-**Início rápido (Windows):** execute `iniciar-fatec-mission.bat`, que instala as dependências e inicia os três projetos.
-
-**Execução manual:**
+### 10.1 Clonar os repositórios
 
 ```bash
-# 1. API (crie antes o arquivo .env — variáveis descritas no README da API)
+# 1. Repositório principal (documentação e script .bat)
+git clone https://github.com/maholiribeiro/Fatec-Mission fatec-mission
+cd fatec-mission
+
+# 2. Dentro da pasta criada, clone os três projetos (mantenha estes nomes de pasta)
+git clone https://github.com/maholiribeiro/fatec-mission-api fatec-mission-api
+git clone https://github.com/maholiribeiro/fatec-mission-web fatec-mission-web
+git clone https://github.com/maholiribeiro/fatec-mission-admin fatec-mission-admin
+```
+
+> O nome da pasta no final de cada comando é importante: o script `.bat` procura exatamente por `fatec-mission-api`, `fatec-mission-web` e `fatec-mission-admin`.
+
+### 10.2 Configurar a API
+
+Na pasta `fatec-mission-api`, crie o arquivo `.env` a partir do modelo `.env.example` e preencha, no mínimo, `DB_PASSWORD` (senha do MySQL) e `JWT_SECRET` (valor longo e aleatório). As demais variáveis estão descritas no README da API.
+
+```bash
+cd fatec-mission-api
+copy .env.example .env      # Windows (no Linux/macOS: cp .env.example .env)
+```
+
+Na primeira execução, defina `DB_AUTO_SEED=true` no `.env` (ou rode `npm run db:seed`) para criar o administrador e as missões de exemplo.
+
+> O arquivo `.env` contém credenciais e **não deve ser versionado**. Se você usar o script `.bat`, ele cria o `.env` automaticamente (veja a seção 10.4).
+
+### 10.3 Executar
+
+**Opção A — Script `.bat` (Windows):** execute `iniciar-fatec-mission.bat` com um duplo clique. Ele prepara e inicia os três projetos ([detalhes abaixo](#104-script-iniciar-fatec-missionbat)).
+
+**Opção B — Execução manual** (qualquer sistema), cada projeto em um terminal:
+
+```bash
+# API
 cd fatec-mission-api
 npm install
 npm run db:seed      # cria o banco, as tabelas e dados de exemplo
 npm run dev          # http://localhost:3000  (documentação em /api-docs)
 
-# 2. App do estudante
+# App do estudante
 cd fatec-mission-web
 npm install
 npm run dev          # http://localhost:5173
 
-# 3. Painel administrativo
+# Painel administrativo
 cd fatec-mission-admin
 npm install
 npm run dev          # http://localhost:5175
@@ -246,6 +279,41 @@ npm run dev          # http://localhost:5175
 **Testes da API:** `npm test` na pasta `fatec-mission-api`.
 
 **Acesso de exemplo (apenas desenvolvimento):** administrador `admin@fatec.sp.gov.br` / `Admin@123`.
+
+### 10.4 Script `iniciar-fatec-mission.bat`
+
+Script para **Windows** que prepara e inicia as três aplicações com um duplo clique, cada uma em sua própria janela. Ele deve ficar na pasta que contém os três projetos (`fatec-mission-api`, `fatec-mission-web` e `fatec-mission-admin`), como mostrado na seção 5.
+
+**O que o script faz, em ordem:**
+
+1. **Verifica os pré-requisitos:** se o Node.js está instalado e se as três pastas existem (com `package.json`). Caso contrário, exibe o erro e encerra.
+2. **Configura a API:** se não existir o arquivo `.env`, cria um a partir do `.env.example` e o abre no Bloco de Notas para você preencher `DB_PASSWORD` e `JWT_SECRET`.
+3. **Instala as dependências:** em cada projeto, executa `npm install` quando a pasta `node_modules` não existe ou está incompleta. Se já estiver tudo instalado, apenas segue.
+4. **Pergunta o modo do app do estudante:** `[1]` Normal (HTTP) ou `[2]` HTTPS, necessário para usar a câmera do celular na rede local. Sem resposta em 30 segundos, usa o modo normal.
+5. **Inicia os projetos**, cada um em uma janela, pulando os que já estiverem rodando:
+
+   | Projeto | Endereço | Observação |
+   |---|---|---|
+   | API | http://localhost:3000 | Documentação Swagger em `/api-docs`. O script aguarda até 60 s a API ficar pronta |
+   | App do estudante | http://localhost:5173 (ou `https://` no modo 2) | No celular, use o endereço *Network* exibido na janela do app |
+   | Painel administrativo | http://localhost:5175 | |
+
+6. **Abre o navegador** no painel administrativo e no app do estudante e exibe um resumo com os endereços.
+
+**Antes de executar:**
+
+- O **MySQL precisa estar ligado**. A API cria o banco e as tabelas ao iniciar; para criar também o administrador e os dados de exemplo, use `DB_AUTO_SEED=true` no `.env`.
+- Para **encerrar**, feche a janela de cada projeto (ou pressione `Ctrl + C` nela).
+- O script é exclusivo do **Windows**. Em Linux ou macOS, use a execução manual (Opção B).
+
+**Problemas comuns:**
+
+| Mensagem | Causa provável | Como resolver |
+|---|---|---|
+| `Node.js não encontrado` | Node.js não instalado ou fora do PATH | Instale em [nodejs.org](https://nodejs.org) e abra o script novamente |
+| `Projeto não encontrado` | O `.bat` não está na pasta dos três projetos, ou as pastas têm outros nomes | Reclone com os nomes exatos da seção 10.1 |
+| `A API não respondeu em 60s` | MySQL desligado ou credenciais incorretas no `.env` | Ligue o MySQL, confira `DB_USER` e `DB_PASSWORD` e veja a janela da API |
+| `Falha ao instalar as dependências` | Sem conexão com a internet ou erro do npm | Verifique a conexão, leia a mensagem do npm e execute novamente |
 
 ---
 
